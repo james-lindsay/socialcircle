@@ -10,6 +10,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import register from "./controllers/auth.js";
+import userRoutes from "./routes/users.js";
+import { verifyToken } from "./middleware/auth.js";
 
 //configurations
 
@@ -41,7 +43,9 @@ const upload = multer({ storage });
 
 app.post("/auth.register", upload.single("picture"), register);
 
+//ROUTES
 app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
 
 //MONGOOSE SETUP
 const PORT = process.env.PORT || 6000;
